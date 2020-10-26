@@ -1,10 +1,14 @@
-package Platform;
+/**
+ * @author Umaralikhon Kayumov
+ * @version 2.0
+ */
 
+package Platform;
 import java.util.Scanner;
 
 class Main{
     public static Scanner arg = new Scanner (System.in);
-    public static void main(String ... args){
+    public static void main(String ... args) throws ScannerExceptions, StorageException, CameraException {
         int gb;
         int mpx;
         int cost;
@@ -19,11 +23,15 @@ class Main{
         System.out.println("<1> Samsung");
         System.out.println("<2> iPhone");
         System.out.print("==> ");
+
         choice = arg.nextInt();
+        if(choice != 1 && choice != 2){
+         throw new ScannerExceptions(); //Exceptions
+        }
 
         System.out.println("Введите количество устройств: ");
-        System.out.print("==> ");
-        size = arg.nextInt();
+            System.out.print("==> ");
+            size = arg.nextInt();
 
         if(choice == 1){
             samsung = new Samsung[size];
@@ -37,8 +45,17 @@ class Main{
                 model = arg.nextLine();
                 System.out.print("Введите память ->" );
                 gb = arg.nextInt();
+                if(gb > 1024) {
+                    throw new StorageException(); //Exceptions
+                }
+
                 System.out.print("Введите камеру ->" );
                 mpx = arg.nextInt();
+                if (mpx > 108){
+                    throw new CameraException(); //Exceptions
+                }
+
+
                 System.out.print("Введите цену ->" );
                 cost = arg.nextInt();
                 System.out.println();
@@ -52,8 +69,10 @@ class Main{
             System.out.println("<-- ---------------------- -->");
 
             for (int i = 0; i < size; i++){
-               samsung[i].print();
+                samsung[i].print();
             }
+
+
         }else if(choice == 2) {
             iphone = new Iphone[size];
             System.out.println("iPhone");
@@ -66,8 +85,16 @@ class Main{
                 model = arg.nextLine();
                 System.out.print("Введите память ->");
                 gb = arg.nextInt();
+                if(gb > 512){
+                    throw new StorageException(); //Exceptions
+                }
+
                 System.out.print("Введите камеру ->");
                 mpx = arg.nextInt();
+                if (mpx > 108){
+                    throw new CameraException(); //Exceptions
+                }
+
                 System.out.print("Введите цену ->");
                 cost = arg.nextInt();
                 System.out.println();
