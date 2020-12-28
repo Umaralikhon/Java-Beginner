@@ -1,4 +1,4 @@
-package JCore;
+package Platform;
 
 public class Basket {
     private String name;
@@ -8,13 +8,8 @@ public class Basket {
         this.cost = cost;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
     public int getCost() {
         return cost;
     }
-
 }
 
