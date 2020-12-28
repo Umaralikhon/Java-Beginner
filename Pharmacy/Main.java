@@ -1,10 +1,10 @@
-package JCore;
+package Platform;
 
 /**
  * @author Umaralikhon Kayumov
- * @version 1.0
+ * @version 2.1
  * <p>
- * This console program is gets and save farmacy pills
+ * This console program is gets and save pharmacy pills
  */
 
 import java.util.*;
@@ -12,12 +12,13 @@ import java.lang.Integer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.FileWriter;
 
 public class Main {
 
     public static BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NumberFormatException {
         // write your code here
         int cost;
         String name;
@@ -25,6 +26,7 @@ public class Main {
         int size;
         int type;
         int sum = 0; //Counts total cost of basket
+        String path = "absentPills.txt";
 
 
         //menu();
@@ -39,7 +41,8 @@ public class Main {
             if (type == 1) {
                 System.out.println("\n" + (i));
                 System.out.print("Enter the name of pill: ");
-                name = read.readLine();
+                name = read.readLine().toUpperCase();
+
                 System.out.print("Enter the cost of pill: ");
                 String c = read.readLine();
                 cost = Integer.parseInt(c);
@@ -62,16 +65,16 @@ public class Main {
             else if (type == 3) {
                 System.out.println("Enter the searching element");
                 System.out.print("-> ");
-                search = read.readLine();
+                search = read.readLine().toUpperCase();
 
-                //If searching element is exists in list
+                //If searching element exists in list
                 if (pills.get(search) != null) {
                     System.out.println(search + " " + pills.get(search).getCost());
                     System.out.println("<1> - Add to the basket");
                     System.out.println("<2> - Menu");
 
-                    String sMenu = read.readLine();
-                    int searchMenu = Integer.parseInt(sMenu);
+                    String _searchMenu = read.readLine();
+                    int searchMenu = Integer.parseInt(_searchMenu);
 
                     //Searched element adds tj the basket and count the sum os all pills in the basket
                     if (searchMenu == 1) {
@@ -80,10 +83,19 @@ public class Main {
 
                         System.out.println("Total cost: " + (sum += costOfSearch));
                     }
-                } else {
+
+                } else { //If nothing founded
                     System.out.println("|----------------- |");
                     System.out.println("| Nothing founded! |");
                     System.out.println("|----------------- |");
+
+                    FileWriter fWrite = new FileWriter(path, true);
+
+                    fWrite.write(search); //Adding absent element to the file
+                    fWrite.append("\n");
+                    fWrite.flush();
+
+                    System.out.println("Pill is added to the absent list!");
                 }
             }
 
@@ -107,7 +119,7 @@ public class Main {
 
     /**Function for main menu
      *
-     * @return type - choosen operation
+     * @return type - chosen operation
      * @throws IOException
      */
     public static int menu() throws IOException {
