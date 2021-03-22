@@ -1,0 +1,2 @@
+Hello new branch!
+This line was written in main branch!
