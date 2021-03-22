@@ -1,1 +1,2 @@
 Hello new branch!
+This line was written in MyBranch!
