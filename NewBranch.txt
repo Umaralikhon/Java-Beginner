@@ -1,2 +1,3 @@
 Hello new branch!
 This line was written in main branch!
+This line was written in MyBranch!
